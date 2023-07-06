@@ -31,7 +31,7 @@
 	// "shutdownAction": "none",
 
 	// Uncomment the next line to run commands after the container is created.
-	"postCreateCommand": "gunicorn src.main:app --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000 --log-level=debug --timeout=60 --reload' ",
+	"postCreateCommand": "gunicorn src.main:app --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000 --log-level=debug --timeout=60 --reload",
 
 	// Configure tool-specific properties.
 	// "customizations": {},
@@ -45,7 +45,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"donjayamanne.python-extension-pack"
+				"donjayamanne.python-extension-pack",
+				"GitHub.copilot"
 			]
 		}
 	}

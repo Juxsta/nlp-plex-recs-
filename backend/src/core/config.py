@@ -28,7 +28,15 @@ class Settings(BaseSettings):
     MAX_OVERFLOW: int = Field(default=64, env="MAX_OVERFLOW")
     POOL_SIZE: Optional[int]
     POSTGRES_URL: Optional[str]
-
+    
+    OPENAI_API_KEY: str = Field(default="", env="OPENAI_API_KEY")
+    PINECONE_API_KEY:str = Field(default="", env="PINECONE_API_KEY")
+    PINECONE_ENV:str = Field(default="", env="PINECONE_ENV")
+    TAUTULLI_API_KEY:str = Field(default="", env="TAUTULLI_API_KEY")
+    TAUTULLI_URL:str = Field(default="tautulli", env="TAUTULLI_URL")
+    TVDB_API_KEY:str = Field(default="", env="TVDB_API_KEY")
+    PLEX_URL:str = Field(default="plex", env="PLEX_URL")
+    PLEX_TOKEN:str = Field(default="", env="PLEX_TOKEN")
     @validator("POOL_SIZE", pre=True)
     def build_pool(cls, v: Optional[str], values: Dict[str, Any]) -> Any:
         if isinstance(v, int):
