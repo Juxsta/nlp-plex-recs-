@@ -4,7 +4,7 @@ import openai
 import pinecone
 from plexapi.server import PlexServer
 from tautulli import RawAPI
-
+from enum import Enum
 from src.core.config import settings
 from typing import Any, Dict
 
@@ -103,9 +103,14 @@ def sync_db():
 
     # Cleaning up
     pinecone.deinit()
+
+class ModelName(str, Enum):
+    gpt_4 = "gpt-4"
+    gpt_3 = "gpt-3.5-turbo"
+    gpt_3_16k = "gpt-3.5-turbo-16k"
     
 @router.get("/querydb", tags=["Queries"])
-async def query_db() -> Dict[str, Any]:
+async def query_db(query: str,  model: ModelName) -> Dict[str, Any]:
     # Initialize Pinecone
     pinecone.init(api_key=settings.PINECONE_API_KEY, environment=settings.PINECONE_ENV)
     index_name = "media-index"
@@ -115,7 +120,6 @@ async def query_db() -> Dict[str, Any]:
     openai.api_key = settings.OPENAI_API_KEY
 
     # Prepare the query
-    query = "Anime movies that will make me cry"
     xq = openai.Embedding.create(input=query, model="text-embedding-ada-002")['data'][0]['embedding']
 
     # Query Pinecone index
@@ -182,4 +186,3 @@ async def query_db() -> Dict[str, Any]:
 
     return { "response": assistant_reply}
 
-    
