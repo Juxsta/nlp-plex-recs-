@@ -40,17 +40,17 @@ services:
       - base-data:/data
       - ./backend/:/code
 
-  nginx:
-    restart: always
-    # ports:
-      # - "0.0.0.0:1080:80"
-    env_file:
-      - .env
-    build:
-      context: ./nginx
-      dockerfile: ./Dockerfile
-    volumes:
-        - nginx-data:/etc/letsencrypt
+  # nginx:
+  #   restart: always
+  #   # ports:
+  #     # - "0.0.0.0:1080:80"
+  #   env_file:
+  #     - .env
+  #   build:
+  #     context: ./nginx
+  #     dockerfile: ./Dockerfile
+  #   volumes:
+  #       - nginx-data:/etc/letsencrypt
 
   redis:
     restart: always
